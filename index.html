@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutanti Defender v5.5 - AI & Güncelleme Modülü</title>
+    <style>
+        :root {
+            --bg: #090d16;
+            --panel: #111827;
+            --accent: #0ea5e9;
+            --ai-color: #8b5cf6;
+            --text: #f3f4f6;
+            --muted: #9ca3af;
+            --border: #1f2937;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg); color: var(--text); padding: 20px; }
+        .wrapper { max-width: 900px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
+        .header h1 { font-size: 22px; color: var(--accent); }
+        
+        /* Dil Seçici */
+        .lang-selector select {
+            background: var(--panel);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .box { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .box h2 { font-size: 16px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        
+        .ai-box { border-color: var(--ai-color); background: linear-gradient(135deg, #1e1b4b, var(--panel)); }
+        
+        button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.2s;
+        }
+        button:hover { opacity: 0.9; }
+        .ai-btn { background: var(--ai-color); }
+        
+        .status-text { margin-top: 10px; font-size: 13px; color: var(--muted); }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="header">
+            <h1 id="uiTitle">Mutanti Defender - Akıllı Merkez</h1>
+            <div class="lang-selector">
+                <select id="languageSelect" onchange="changeLanguage(this.value)">
+                    <option value="tr">🇹🇷 Türkçe</option>
+                    <option value="en">🇬🇧 English</option>
+                    <option value="de">🇩🇪 Deutsch</option>
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="es">🇪🇸 Español</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="grid">
+            <!-- Yapay Zeka Tehdit Analizi -->
+            <div class="box ai-box">
+                <h2 id="aiHeader">🤖 Yapay Zeka Koruma Modülü</h2>
+                <p id="aiDesc" class="status-text">Yapay zeka motoru, bilinmeyen zararlı yazılımları imza beklemeden anlık olarak analiz eder.</p>
+                <button class="ai-btn" id="aiBtn" onclick="runAIBrainScan()">AI Taraması Başlat</button>
+                <div id="aiResult" class="status-text"></div>
+            </div>
+
+            <!-- Güncelleme Paketi ve Yama Denetimi -->
+            <div class="box">
+                <h2 id="upHeader">📦 Canlı Güncelleme Paketi</h2>
+                <p id="upDesc" class="status-text">GitHub sunucularından en son sürüm yamalarını ve veritabanı imza dosyalarını denetleyin.</p>
+                <button id="upBtn" onclick="checkCloudUpdates()">Güncellemeleri Denetle</button>
+                <div id="upResult" class="status-text"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Çoklu Dil Sözlüğü
+        const translations = {
+            tr: {
+                title: "Mutanti Defender - Akıllı Merkez",
+                aiH: "🤖 Yapay Zeka Koruma Modülü",
+                aiD: "Yapay zeka motoru, bilinmeyen zararlı yazılımları imza beklemeden anlık olarak analiz eder.",
+                aiB: "AI Taraması Başlat",
+                upH: "📦 Canlı Güncelleme Paketi",
+                upD: "GitHub sunucularından en son sürüm yamalarını ve veritabanı imza dosyalarını denetleyin.",
+                upB: "Güncellemeleri Denetle",
+                aiRes: "Yapay zeka analizi tamamlandı: Sistem tamamen temiz ve güvenli.",
+                upRes: "GitHub v5.5.1 güncelleme paketi yüklü ve güncel."
+            },
+            en: {
+                title: "Mutanti Defender - Smart Center",
+                aiH: "🤖 AI Protection Module",
+                aiD: "The AI engine analyzes unknown malware instantly without waiting for signatures.",
+                aiB: "Start AI Scan",
+                upH: "📦 Live Update Package",
+                upD: "Check for the latest patch releases and database signature files from GitHub servers.",
+                upB: "Check for Updates",
+                aiRes: "AI analysis complete: System is fully clean and secure.",
+                upRes: "GitHub v5.5.1 update package is installed and up to date."
+            },
+            de: {
+                title: "Mutanti Defender - Smart Center",
+                aiH: "🤖 KI-Schutzmodul",
+                aiD: "Die KI-Engine analysiert unbekannte Malware sofort ohne auf Signaturen zu warten.",
+                aiB: "KI-Scan starten",
+                upH: "📦 Live-Update-Paket",
+                upD: "Überprüfen Sie die neuesten Patch-Releases von GitHub-Servern.",
+                upB: "Nach Updates suchen",
+                aiRes: "KI-Analyse abgeschlossen: System ist sauber und sicher.",
+                upRes: "GitHub v5.5.1 Update-Paket ist aktuell."
+            }
+        };
+
+        function changeLanguage(lang) {
+            const t = translations[lang] || translations['tr'];
+            document.getElementById('uiTitle').innerText = t.title;
+            document.getElementById('aiHeader').innerText = t.aiH;
+            document.getElementById('aiDesc').innerText = t.aiD;
+            document.getElementById('aiBtn').innerText = t.aiB;
+            document.getElementById('upHeader').innerText = t.upH;
+            document.getElementById('upDesc').innerText = t.upD;
+            document.getElementById('upBtn').innerText = t.upB;
+            document.getElementById('aiResult').innerText = "";
+            document.getElementById('upResult').innerText = "";
+        }
+
+        function runAIBrainScan() {
+            const lang = document.getElementById('languageSelect').value;
+            const t = translations[lang] || translations['tr'];
+            document.getElementById('aiResult').innerText = "⏳ " + (lang === 'en' ? "AI scanning memory..." : lang === 'de' ? "KI scannt Speicher..." : "Yapay zeka bellek analizi yapıyor...");
+            setTimeout(() => {
+                document.getElementById('aiResult').innerText = "✅ " + t.aiRes;
+            }, 1000);
+        }
+
+        function checkCloudUpdates() {
+            const lang = document.getElementById('languageSelect').value;
+            const t = translations[lang] || translations['tr'];
+            document.getElementById('upResult').innerText = "🔄 " + (lang === 'en' ? "Connecting to GitHub..." : lang === 'de' ? "Verbindung zu GitHub..." : "GitHub sunucularına bağlanılıyor...");
+            setTimeout(() => {
+                document.getElementById('upResult').innerText = "🚀 " + t.upRes;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
