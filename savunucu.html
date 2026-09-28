@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutanti Defender v5.5 - Resmi İndirme ve Güvenlik Merkezi</title>
+    <style>
+        :root {
+            --bg-color: #090d16;
+            --card-bg: #111827;
+            --accent-blue: #0ea5e9;
+            --accent-green: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: #1f2937;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        .logo-text span {
+            color: var(--accent-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        .hero {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .hero-content h1 span {
+            color: var(--accent-blue);
+        }
+
+        .hero-content p {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .download-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .download-box h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .option-btn {
+            background-color: #1f2937;
+            border: 2px solid transparent;
+            color: var(--text-main);
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        .option-btn.active {
+            background-color: #0369a1;
+            border-color: var(--accent-blue);
+        }
+
+        .main-download-btn {
+            width: 100%;
+            background-color: var(--accent-green);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .main-download-btn:hover {
+            background-color: #059669;
+        }
+
+        .version-info {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 12px;
+        }
+
+        .features-section {
+            max-width: 1100px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .specs-section {
+            max-width: 1100px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .specs-table th, .specs-table td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+        }
+
+        .specs-table th {
+            background-color: #1f2937;
+            color: var(--text-main);
+        }
+
+        .specs-table td {
+            color: var(--text-muted);
+        }
+
+        footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 30px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 80px;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo-area">
+                <div class="logo-icon">🛡️</div>
+                <div class="logo-text">Mutanti<span>Defender</span></div>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Özellikler</a>
+                <a href="#specs">Sistem Gereksinimleri</a>
+                <a href="#download">İndir</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Yeni Nesil Güvenlik: <span>Mutanti Defender v5.5</span></h1>
+            <p>Bilgisayarınızı tehditlerden koruyun, 25'ten fazla gelişmiş sistem ve siber güvenlik aracıyla performansınızı zirvede tutun. Tamamen güncel, hızlı ve güvenilir koruma.</p>
+            <div style="display: flex; gap: 15px;">
+                <a href="#download" style="background-color: var(--accent-blue); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">Hemen İndir</a>
+                <a href="#features" style="background-color: transparent; border: 1px solid var(--border-color); color: var(--text-main); padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">Özellikleri İncele</a>
+            </div>
+        </div>
+
+        <div class="download-box" id="download">
+            <h3>Güvenli İndir Merkezi</h3>
+            
+            <div class="form-group">
+                <label class="form-label">İşletim Sistemi:</label>
+                <div class="options-grid">
+                    <button class="option-btn active" onclick="setOS('windows', this)">Windows</button>
+                    <button class="option-btn" onclick="setOS('mac', this)">macOS</button>
+                </div>
+            </div>
+
+            <div class="form-group" id="arch-group">
+                <label class="form-label">Mimari (Bit):</label>
+                <div class="options-grid">
+                    <button class="option-btn active" onclick="setArch('64', this)">64-Bit</button>
+                    <button class="option-btn" onclick="setArch('32', this)">32-Bit</button>
+                </div>
+            </div>
+
+            <button class="main-download-btn" id="downloadBtn" onclick="triggerDownload()">Setup.exe İndir</button>
+            <div class="version-info">Sürüm: 5.5 Ultimate | Boyut: ~45 MB | Virüs Taramasından Geçti ✅</div>
+        </div>
+    </section>
+
+    <section class="features-section" id="features">
+        <div class="section-header">
+            <h2>Neden Mutanti Defender?</h2>
+            <p>Sisteminizi korumak ve optimize etmek için tasarlanmış güçlü modüller.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>25+ Gelişmiş Araç</h3>
+                <p>Süreç yönetimi, ağ denetimi, karantina ve sistem araçları tek bir pakette birleştirilmiştir.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>Gerçek Zamanlı Kalkan</h3>
+                <p>Arka planda sessizce çalışarak bilgisayarınızı her türlü zararlı yazılıma karşı korur.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Yüksek Performans</h3>
+                <p>Bilgisayarınızı yormayan optimize edilmiş yapısıyla minimum kaynak tüketimi sağlar.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="specs-section" id="specs">
+        <div class="section-header">
+            <h2>Sistem Gereksinimleri</h2>
+            <p>Mutanti Defender v5.5'in sorunsuz çalışması için gereken minimum özellikler.</p>
+        </div>
+
+        <table class="specs-table">
+            <tr>
+                <th>Bileşen</th>
+                <th>Minimum Gereksinim</th>
+            </tr>
+            <tr>
+                <td>İşletim Sistemi</td>
+                <td>Windows 11 / 10 / 8 / 7 (64-bit veya 32-bit)</td>
+            </tr>
+            <tr>
+                <td>İşlemci</td>
+                <td>1 GHz veya daha hızlı işlemci</td>
+            </tr>
+            <tr>
+                <td>RAM (Bellek)</td>
+                <td>1 GB RAM</td>
+            </tr>
+            <tr>
+                <td>Depolama Alanı</td>
+                <td>100 MB boş alan</td>
+            </tr>
+        </table>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Mutanti Defender. Tüm hakları saklıdır. Güvenliğiniz bizim önceliğimizdir.</p>
+    </footer>
+
+    <script>
+        let selectedOS = 'windows';
+        let selectedArch = '64';
+
+        function setOS(os, element) {
+            selectedOS = os;
+            let buttons = element.parentElement.querySelectorAll('.option-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+
+            let archGroup = document.getElementById('arch-group');
+            let downloadBtn = document.getElementById('downloadBtn');
+
+            if (os === 'mac') {
+                archGroup.style.display = 'none';
+                downloadBtn.innerText = "macOS Sürümü Yakında";
+            } else {
+                archGroup.style.display = 'block';
+                downloadBtn.innerText = "Setup.exe İndir";
+            }
+        }
+
+        function setArch(arch, element) {
+            selectedArch = arch;
+            let buttons = element.parentElement.querySelectorAll('.option-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function triggerDownload() {
+            if (selectedOS === 'mac') {
+                alert("macOS sürümü şu anda geliştirme aşamasındadır. Lütfen Windows sürümünü kullanın.");
+                return;
+            }
+
+            alert(`Mutanti Defender v5.5 (${selectedArch}-bit) kurulum dosyası indiriliyor... Setup.exe dosyasını çalıştırarak kurulumu tamamlayabilirsiniz.`);
+            
+            // Buraya kendi Google Drive veya sunucu indirme linkini bağlayabilirsin:
+            // window.location.href = "BURAYA_GOOGLE_DRIVE_LINKINI_YAZ";
+        }
+    </script>
+
+</body>
+</html>
